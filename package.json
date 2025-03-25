@@ -6,7 +6,13 @@
 	"license": "MIT",
 	"husky": {
 		"hooks": {
-			"pre-commit": "lint-staged"
+			"pre-commit": "lint-staged",
+			"commit-msg": "commitlint --config .commitlintrc.js -E HUSKY_GIT_PARAMS"
+		}
+	},
+	"config": {
+		"commitizen": {
+			"path": "node_modules/cz-customizable"
 		}
 	},
 	"lint-staged": {
@@ -20,12 +26,17 @@
 	"scripts": {
 		"lint": "eslint",
 		"lint:fix": "eslint --fix",
-		"prepare": "husky install"
+		"prepare": "husky install",
+		"commit": "git-cz"
 	},
 	"devDependencies": {
 		"@eslint/js": "^9.23.0",
 		"@typescript-eslint/eslint-plugin": "^8.28.0",
 		"@typescript-eslint/parser": "^8.28.0",
+		"commitizen": "4.3.0",
+		"commitlint-config-cz": "0.13.3",
+		"cz-conventional-changelog": "3.3.0",
+		"cz-customizable": "7.0.0",
 		"eslint": "^9.23.0",
 		"eslint-config-prettier": "^10.1.1",
 		"eslint-config-standard": "^17.1.0",
