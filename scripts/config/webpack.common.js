@@ -1,6 +1,7 @@
 const { resolve } = require('path');
 const { PROJECT_PATH, isDev } = require('../constants');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
+// const is = require('@babel/runtime-corejs3/core-js-stable/core-js-stable/object/is.js');
 
 const PLUGINS = [
 	// 配置html，自动引入打包出的js文件
@@ -27,50 +28,68 @@ const PLUGINS = [
 	}),
 ];
 
+const getCssLoaders = (importLoaders) => [
+	'style-loader',
+	{
+		loader: 'css-loader',
+		options: {
+			modules: {
+				localIdentName: '[local]__[hash:base64:5]',
+			},
+			sourceMap: isDev,
+			importLoaders,
+		},
+	},
+	'postcss-loader',
+];
+
 module.exports = {
+  mode: isDev ? 'development' : 'production',
   entry: {
-    app: resolve(PROJECT_PATH, './src/app.js'),
+    app: resolve(PROJECT_PATH, './src/index.tsx'),
   },
   output: {
     filename: `js/[name]${isDev ? '' : '.[hash:8]'}.js`,
     path: resolve(PROJECT_PATH, './dist'),
   },
+  resolve: {
+    extensions: [".tsx", ".ts", ".js", ".json"],
+    alias: {
+      "@src": resolve(PROJECT_PATH, "./src"),
+      "@components": resolve(PROJECT_PATH, "./src/components"),
+      "@utils": resolve(PROJECT_PATH, "./src/utils"),
+    },
+  },
   module: {
     rules: [
       {
-        test: /\.css$/,
-        use: [
-          'style-loader',
-          {
-            loader: 'css-loader',
-            options: {
-              modules: false, // 默认就是 false, 若要开启，可在官网具体查看可配置项
-              sourceMap: isDev, // 开启后与 devtool 设置一致, 开发环境开启，生产环境关闭
-              importLoaders: 0, // 指定在 CSS loader 处理前使用的 laoder 数量
-            },
-          },
-        ],
-      },
-      {
-        test: /\.less$/,
-        use: [
-          'style-loader',
-          {
-            loader: 'css-loader',
-            options: {
-              modules: false,
-              sourceMap: isDev,
-              importLoaders: 1, // 需要先被 less-loader 处理，所以这里设置为 1
-            },
-          },
-          {
-            loader: 'less-loader',
-            options: {
-              sourceMap: isDev,
-            },
-          },
-        ],
-      },
+				test: /\.css$/,
+				use: getCssLoaders(1),
+			},
+			{
+				test: /\.less$/,
+				use: [
+					...getCssLoaders(2),
+					{
+						loader: 'less-loader',
+						options: {
+							sourceMap: isDev,
+						},
+					},
+				],
+			},
+			{
+				test: /\.scss$/,
+				use: [
+					...getCssLoaders(2),
+					{
+						loader: 'sass-loader',
+						options: {
+							sourceMap: isDev,
+						},
+					},
+				],
+			},
       {
         test: /\.(png|svg|jpg|jpeg|gif)$/i,
         type: "asset/resource",
@@ -95,6 +114,12 @@ module.exports = {
           },
         },
       },
+      {
+				test: /\.(tsx?|js)$/,
+				loader: 'babel-loader',
+				options: {cacheDirectory: true},
+				exclude: /node_modules/,
+			},
     ]
   },
   plugins: PLUGINS,

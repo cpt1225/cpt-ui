@@ -9,11 +9,11 @@ const ERROR = 2;
 
 export default defineConfig([
   {
-    files: ["src/**/*.ts", "src/**/*.tsx"],
+    files: ["src/**/*.ts", "src/**/*.tsx","src/index.tsx"],
     languageOptions: {
       parser: tsParser,
       parserOptions: {
-        project: "./tsconfig.json",  // 指向你的 tsconfig.json
+        project: "./tsconfig.json",  
         ecmaVersion: "latest",
         sourceType: "module",
         ecmaFeatures: {
@@ -47,7 +47,17 @@ export default defineConfig([
       '**/*.js',
       '/node_modules',
       '/build',
-      '/dist'
+      '/dist',
     ],
+  },
+  {
+    settings: {
+      'import/resolver': {
+        node: {
+          extensions: ['.tsx', '.ts', '.js', '.json'],
+        },
+        typescript: {},
+      },
+    },
   }
 ]);
