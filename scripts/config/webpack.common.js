@@ -1,7 +1,6 @@
 const { resolve } = require('path');
 const { PROJECT_PATH, isDev } = require('../constants');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
-// const is = require('@babel/runtime-corejs3/core-js-stable/core-js-stable/object/is.js');
 
 const PLUGINS = [
 	// 配置html，自动引入打包出的js文件
