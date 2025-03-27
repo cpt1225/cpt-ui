@@ -1,7 +1,7 @@
 n:
   push:
     branches:
-      - rollup_comp
+      - main
 
 jobs:
   # 构建并部署作业
