@@ -1,4 +1,6 @@
-n:
+# GitHub Actions工作流：Storybook构建与部署
+# 当代码推送到'rollup_comp'分支时触发
+on:
   push:
     branches:
       - main
@@ -38,5 +40,3 @@ jobs:
         env:
           # 设置GitHub Token
           GITHUB_TOKEN: ${{ secrets.DELOY_STORYBOOK }}
-
-
