@@ -1,17 +1,20 @@
 {
-  "name": "demo",
-  "description": "a lint demo",
-  "version": "1.0.0",
+  "name": "cpt-ui",
+  "description": "a easy react component library",
+  "version": "1.0.1-0",
   "main": "./dist/cjs/index.js",
   "module": "./dist/esm/index.js",
+  "author": "cpt1225",
   "types": "./dist/index.d.ts",
   "exports": {
-		".": {
-			"import": "./dist/esm/index.js",
-			"require": "./dist/cjs/index.js"
-		}
-	},
-  "files": [ "dist" ],
+    ".": {
+      "import": "./dist/esm/index.js",
+      "require": "./dist/cjs/index.js"
+    }
+  },
+  "files": [
+    "dist"
+  ],
   "license": "MIT",
   "husky": {
     "hooks": {
@@ -119,6 +122,7 @@
     "webpack-dev-server": "5.0.3",
     "webpack-merge": "5.10.0"
   },
+  "peerDependencies": {},
   "dependencies": {
     "@babel/runtime-corejs3": "7.24.0",
     "react": "18.2.0",
