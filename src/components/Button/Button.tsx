@@ -3,29 +3,29 @@ import style from './style/index.module.less';
 
 export interface ButtonProps {
 	/**
-	 * Is this the principal call to action on the page?
+	 * 主要按钮
 	 */
 	primary?: boolean;
 	/**
-	 * What background color to use
+	 * 背景颜色
 	 */
 	backgroundColor?: string;
 	/**
-	 * How large should the button be?
+	 * 按钮大小
 	 */
 	size?: 'small' | 'medium' | 'large';
 	/**
-	 * Button contents
+	 * 按钮内部消息
 	 */
 	label: string;
 	/**
-	 * Optional click handler
+	 * 触发点击事件
 	 */
 	onClick?: () => void;
 }
 
 /**
- * Primary UI component for user interaction
+ * 一个简单的按钮组件
  */
 export const Button = ({
 	primary = false,
