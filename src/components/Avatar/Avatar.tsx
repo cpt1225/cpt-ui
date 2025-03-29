@@ -5,25 +5,25 @@ import style from './style/index.module.less'
 export interface AvatarProps {
   /**
    * 头像图片地址
-   */
+  */
   src?: string;
   /**
    * 头像形状
-   */
+  */
   shape?: 'circle' | 'square';
   /* 
     * 名字
-   */
+  */
   alt?: string;
   /**
    * 边框颜色
-   */
+  */
   color?: string;
 }
 
 /**
  * 头像组件
- */
+*/
 export const Avatar = ({
   src,
   shape,

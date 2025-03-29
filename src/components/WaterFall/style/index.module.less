@@ -1,0 +1,119 @@
+// column实现瀑布流布局
+.container {
+	width: 100%; /* 容器宽度 */
+	column-count: 5; /* 定义列数 */
+	column-gap: 16px; /* 列与列之间的间距 */
+
+	.item {
+		break-inside: avoid; /* 防止内容在列内部断开 */
+		margin-bottom: 16px; /* 每个项目之间的间距 */
+
+		img {
+			width: 100%; /* 图片宽度填满列宽 */
+			height: auto; /* 保持图片宽高比 */
+		}
+	}
+}
+
+// flex实现瀑布流布局
+.flexContainer {
+	display: flex;
+	width: 100%;
+
+	.childContainer {
+		flex: 1 1 1;
+		margin-left: 10px;
+    
+		.item {
+			flex: '0 0 auto';
+			width: '100%';
+
+			img {
+				width: 100%; /* 图片宽度填满列宽 */
+				height: auto; /* 保持图片宽高比 */
+			}
+		}
+	}
+}
+
+//  grid实现瀑布流布局
+.gridContainer {
+	display: grid;
+	grid-auto-rows: 10px;
+	grid-gap: 0 10px;
+	grid-template-columns: repeat(4, 1fr);
+	align-items: end;
+
+	.item {
+		display: flex;
+		align-items: center;
+		justify-content: center;
+		background: #f8f8fa;
+
+		img {
+			width: 100%; /* 图片宽度填满列宽 */
+			height: auto; /* 保持图片宽高比 */
+		}
+	}
+}
+
+// js实现瀑布流布局
+.jsContainer {
+	position: relative;
+	width: 900px;
+
+	.jsItem {
+		position: absolute;
+		display: flex;
+		align-items: center;
+		justify-content: center;
+		width: 200px;
+		margin-bottom: 10px;
+		overflow: hidden;
+		color: white;
+		font-size: 18px;
+		background: rgb(236 146 10);
+		transition: all 0.1s;
+
+		.jsTag {
+			position: absolute;
+			top: 2px;
+			left: 2px;
+			color: white;
+		}
+
+		img {
+			width: 100%;
+			height: auto;
+		}
+	}
+}
+
+/* 为了响应式设计，你可以使用媒体查询来改变列数 */
+@media (width <= 1000px) {
+	/* stylelint-disable-next-line rule-empty-line-before */
+	.container {
+		column-count: 4;
+	}
+}
+
+@media (width <= 800px) {
+	/* stylelint-disable-next-line rule-empty-line-before */
+	.container {
+		column-count: 3;
+	}
+}
+
+@media (width <= 600px) {
+	/* stylelint-disable-next-line rule-empty-line-before */
+	.container {
+		column-count: 2;
+	}
+}
+
+@media (width <= 400px) {
+	/* stylelint-disable-next-line rule-empty-line-before */
+	.container {
+		column-count: 1;
+	}
+}
